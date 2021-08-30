@@ -27,7 +27,7 @@ namespace WeatherService.API.Controllers
         /// </summary>
         /// <param name="correlationId">The value that is used to combine several requests into a common group</param>
         /// <param name="request">Model for search</param>
-        /// <response code="200">Success. List of weather was received successfully</response>
+        /// <response code="200">Success. List of cities was received successfully</response>
         /// <response code="400">Bad Request</response>
         /// <response code="500">Internal Server Error</response>
         [ProducesResponseType(typeof(BaseResponseModel<CityResponseDto>), StatusCodes.Status200OK)]
@@ -46,7 +46,7 @@ namespace WeatherService.API.Controllers
         /// </summary>
         /// <param name="correlationId">The value that is used to combine several requests into a common group</param>
         /// <param name="id">Id for search</param>
-        /// <response code="200">Success. List of weather was received successfully</response>
+        /// <response code="200">Success. City was received successfully</response>
         /// <response code="404">Not Found</response>
         /// <response code="500">Internal Server Error</response>
         [ProducesResponseType(typeof(CityResponseDto), StatusCodes.Status200OK)]

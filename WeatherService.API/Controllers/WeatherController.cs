@@ -30,7 +30,7 @@ namespace WeatherService.API.Controllers
         /// </summary>
         /// <param name="correlationId">The value that is used to combine several requests into a common group</param>
         /// <param name="request">Model for search</param>
-        /// <response code="200">Success. List of weather was received successfully</response>
+        /// <response code="200">Success. List of weathers was received successfully</response>
         /// <response code="400">Bad Request</response>
         /// <response code="500">Internal Server Error</response>
         [ProducesResponseType(typeof(BaseResponseModel<WeatherResponseDto>), StatusCodes.Status200OK)]
@@ -54,7 +54,7 @@ namespace WeatherService.API.Controllers
         /// </summary>
         /// <param name="correlationId">The value that is used to combine several requests into a common group</param>
         /// <param name="id">Id for search</param>
-        /// <response code="200">Success. List of weather was received successfully</response>
+        /// <response code="200">Success. Weather was received successfully</response>
         /// <response code="404">Not Found</response>
         /// <response code="500">Internal Server Error</response>
         [ProducesResponseType(typeof(WeatherResponseDto), StatusCodes.Status200OK)]
@@ -79,7 +79,7 @@ namespace WeatherService.API.Controllers
         /// <param name="correlationId">The value that is used to combine several requests into a common group</param>
         /// <param name="request">Model for create</param>
         /// <param name="cityId">Id of city</param>
-        /// <response code="201">Created. List of weather was received successfully</response>
+        /// <response code="201">Created. Weather was created successfully</response>
         /// <response code="400">Bad Request</response>
         /// <response code="404">Not Found</response>
         /// <response code="500">Internal Server Error</response>
@@ -118,7 +118,7 @@ namespace WeatherService.API.Controllers
         /// <param name="correlationId">The value that is used to combine several requests into a common group</param>
         /// <param name="request">Model for update</param>
         /// <param name="id">Id for search</param>
-        /// <response code="200">Success. List of weather was received successfully</response>
+        /// <response code="200">Success. Weather was updated successfully</response>
         /// <response code="400">Bad Request</response>
         /// <response code="404">Not Found</response>
         /// <response code="500">Internal Server Error</response>

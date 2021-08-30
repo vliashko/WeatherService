@@ -1,7 +1,6 @@
-﻿using WeatherService.API.Infrastructure;
-using WeatherService.API.Models;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+using WeatherService.API.Infrastructure;
 
 namespace WeatherService.API.Dtos.Requests
 {
@@ -11,13 +10,14 @@ namespace WeatherService.API.Dtos.Requests
     public class WeatherRequestDto : PaginationRequestModel
     {
         /// <summary>
-        /// City for weather search [Minsk, Brest, Grodno, Gomel, Vitebsk, Mogilev]
+        /// City id for search
         /// </summary>
         /// <example>
-        /// Minsk
+        /// b06479a2-4c2f-425b-a7da-baed1e364dc7
         /// </example>
         [Required]
-        public City City { get; set; }
+        [NonEmptyGuid]
+        public Guid CityId { get; set; }
 
         /// <summary>
         /// Date for search

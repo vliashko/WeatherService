@@ -1,7 +1,7 @@
-﻿using WeatherService.API.Dtos.Requests;
-using WeatherService.API.Dtos.Responses;
+﻿using System;
 using System.Threading.Tasks;
-using System;
+using WeatherService.API.Dtos.Requests;
+using WeatherService.API.Dtos.Responses;
 
 namespace WeatherService.API.Contracts
 {
@@ -11,8 +11,8 @@ namespace WeatherService.API.Contracts
 
         public Task<WeatherResponseDto> GetWeatherByIdAsync(Guid id);
 
-        public Task<WeatherResponseDto> AddWeatherAsync(AddWeatherRequestDto request);
+        public Task<WeatherResponseDto> AddWeatherAsync(Guid cityId, AddWeatherRequestDto request);
 
-        public Task<WeatherResponseDto> UpdateWeatherAsync(UpdateWeatherRequestDto request);
+        public Task<WeatherResponseDto> UpdateWeatherAsync(Guid id, UpdateWeatherRequestDto request);
     }
 }

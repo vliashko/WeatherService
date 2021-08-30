@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using WeatherService.API.Contracts;
 using WeatherService.API.Dtos.Requests;
 using WeatherService.API.Dtos.Responses;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using WeatherService.API.Models;
 
 namespace WeatherService.API.Services
 {
@@ -18,23 +20,37 @@ namespace WeatherService.API.Services
             _mapper = mapper;
         }
 
-        public Task<WeatherResponseDto> AddWeatherAsync(AddWeatherRequestDto request)
+        public async Task<WeatherResponseDto> AddWeatherAsync(Guid cityId, AddWeatherRequestDto request)
         {
-            throw new System.NotImplementedException();
+            var weather = _mapper.Map<Weather>(request);
+
+            weather.TemperatureF = 32 + (int)(weather.TemperatureC / 0.5556);
+
+            weather.CityId = cityId;
+
+            var result = await _repository.AddWeatherAsync(weather).ConfigureAwait(false);
+
+            var weatherDto = _mapper.Map<WeatherResponseDto>(result);
+
+            return weatherDto;
         }
 
-        public Task<WeatherResponseDto> GetWeatherByIdAsync(System.Guid id)
+        public async Task<WeatherResponseDto> GetWeatherByIdAsync(Guid id)
         {
-            throw new System.NotImplementedException();
+            var weather = await _repository.GetWeatherByIdAsync(id).ConfigureAwait(false);
+
+            var weatherDto = weather == null ? null : _mapper.Map<WeatherResponseDto>(weather);
+
+            return weatherDto;
         }
 
         public async Task<BaseResponseModel<WeatherResponseDto>> GetWeathersAsync(WeatherRequestDto request)
         {
-            var weathers = await _repository.GetWeathersAsync(request.City, request.Date, request.PageNumber, request.PageSize).ConfigureAwait(false);
+            var weathers = await _repository.GetWeathersAsync(request.CityId, request.Date, request.PageNumber, request.PageSize).ConfigureAwait(false);
 
             var dtoWeathers = _mapper.Map<List<WeatherResponseDto>>(weathers);
 
-            var count = await _repository.GetWeathersCountAsync(request.City, request.Date);
+            var count = await _repository.GetWeathersCountAsync(request.CityId, request.Date).ConfigureAwait(false);
 
             var result = new BaseResponseModel<WeatherResponseDto>()
             {
@@ -45,9 +61,17 @@ namespace WeatherService.API.Services
             return result;
         }
 
-        public Task<WeatherResponseDto> UpdateWeatherAsync(UpdateWeatherRequestDto request)
+        public async Task<WeatherResponseDto> UpdateWeatherAsync(Guid id, UpdateWeatherRequestDto request)
         {
-            throw new System.NotImplementedException();
+            var weather = _mapper.Map<Weather>(request);
+
+            weather.Id = id;
+
+            var result = await _repository.UpdateWeatherAsync(weather).ConfigureAwait(false);
+
+            var weatherDto = _mapper.Map<WeatherResponseDto>(result);
+
+            return weatherDto;
         }
     }
 }

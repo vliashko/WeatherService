@@ -1,12 +1,14 @@
-﻿namespace WeatherService.API.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace WeatherService.API.Models
 {
-    public enum City
+    public class City
     {
-        Minsk,
-        Brest,
-        Grodno,
-        Gomel,
-        Vitebsk,
-        Mogilev
+        public Guid Id { get; set; }
+
+        public string Name { get; set; }
+
+        public ICollection<Weather> Weathers { get; set; }
     }
 }

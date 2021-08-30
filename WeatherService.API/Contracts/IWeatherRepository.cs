@@ -1,20 +1,20 @@
-﻿using WeatherService.API.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using WeatherService.API.Models;
 
 namespace WeatherService.API.Contracts
 {
     public interface IWeatherRepository
     {
-        public Task<int> GetWeathersCountAsync(City city, DateTime? date);
+        public Task<int> GetWeathersCountAsync(Guid cityId, DateTime? date);
 
-        public Task<List<Weather>> GetWeathersAsync(City city, DateTime? date, int pageNumber, int pageSize);
+        public Task<List<Weather>> GetWeathersAsync(Guid cityId, DateTime? date, int pageNumber, int pageSize);
 
         public Task<Weather> GetWeatherByIdAsync(Guid id);
 
-        public Task<Weather> AddWeather(Weather weather);
+        public Task<Weather> AddWeatherAsync(Weather weather);
 
-        public Task<Weather> UpdateWeather(Weather weather);
+        public Task<Weather> UpdateWeatherAsync(Weather weather);
     }
 }

@@ -1,12 +1,13 @@
-using WeatherService.API.Extensions;
-using WeatherService.API.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
+using WeatherService.API.Extensions;
+using WeatherService.API.Infrastructure;
 
 namespace WeatherService.API
 {
@@ -42,6 +43,9 @@ namespace WeatherService.API
             services.RegisterServices();
 
             services.AddAutoMapper(typeof(MappingProfile));
+
+            services.AddDbContext<RepositoryDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("sqlConnection")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

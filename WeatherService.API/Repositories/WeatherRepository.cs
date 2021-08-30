@@ -1,71 +1,77 @@
-﻿using WeatherService.API.Contracts;
-using WeatherService.API.Models;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WeatherService.API.Contracts;
+using WeatherService.API.Infrastructure;
+using WeatherService.API.Models;
 
 namespace WeatherService.API.Repositories
 {
     public class WeatherRepository : IWeatherRepository
     {
-        private static readonly Random random = new();
+        private readonly RepositoryDbContext _context;
 
-        private static readonly Array enumValues = Enum.GetValues(typeof(City));
-
-        private readonly static string[] states = new[]
+        public WeatherRepository(RepositoryDbContext context)
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        private readonly IEnumerable<Weather> weathers = Enumerable.Range(1, 200).Select(i => new Weather()
-        {
-            City = (City)enumValues.GetValue(random.Next(enumValues.Length)),
-            Date = DateTime.Now.AddDays(-i),
-            Summary = states[random.Next(states.Length)],
-            TemperatureC = random.Next(-20, 55)
-        });
-
-        public async Task<int> GetWeathersCountAsync(City city, DateTime? date)
-        {
-            var result = weathers.Where(w => w.City == city);
-
-            if (date.HasValue)
-            {
-                result = weathers.Where(w => w.Date == date.Value.Date);
-            }
-
-            return result.Count();
+            _context = context;
         }
 
-        public async Task<List<Weather>> GetWeathersAsync(City city, DateTime? date, int pageNumber, int pageSize)
+        public async Task<int> GetWeathersCountAsync(Guid cityId, DateTime? date)
         {
-            var result = weathers.Where(w => w.City == city);
+            var result = _context.Weathers.Where(w => w.CityId == cityId);
 
             if (date.HasValue)
             {
-                result = weathers.Where(w => w.Date == date.Value.Date);
+                result = _context.Weathers.Where(w => w.DateTime.Date == date.Value.Date);
             }
 
-            return result.Skip((pageNumber - 1) * pageSize)
+            return await result.CountAsync()
+                               .ConfigureAwait(false);
+        }
+
+        public async Task<List<Weather>> GetWeathersAsync(Guid cityId, DateTime? date, int pageNumber, int pageSize)
+        {
+            var result = _context.Weathers.Where(w => w.CityId == cityId);
+
+            if (date.HasValue)
+            {
+                result = _context.Weathers.Where(w => w.DateTime.Date == date.Value.Date);
+            }
+
+            return await result
+                         .OrderBy(w => w.DateTime)
+                         .Skip((pageNumber - 1) * pageSize)
                          .Take(pageSize)
-                         .OrderBy(w => w.Date)
-                         .ToList();
+                         .AsNoTracking()
+                         .ToListAsync()
+                         .ConfigureAwait(false);
         }
 
-        public Task<Weather> GetWeatherByIdAsync(Guid id)
+        public async Task<Weather> GetWeatherByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var result = await _context.Weathers.FindAsync(id).ConfigureAwait(false);
+
+            return result;
         }
 
-        public Task<Weather> AddWeather(Weather weather)
+        public async Task<Weather> AddWeatherAsync(Weather weather)
         {
-            throw new NotImplementedException();
+            var result = await _context.Weathers.AddAsync(weather).ConfigureAwait(false);
+
+            await _context.SaveChangesAsync();
+
+            return result.Entity;
         }
 
-        public Task<Weather> UpdateWeather(Weather weather)
+        public async Task<Weather> UpdateWeatherAsync(Weather weather)
         {
-            throw new NotImplementedException();
+            var result = _context.Weathers.Update(weather);
+
+            await _context.SaveChangesAsync();
+
+            return result.Entity;
         }
     }
 }

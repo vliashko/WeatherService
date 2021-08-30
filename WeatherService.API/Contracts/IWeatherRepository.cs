@@ -16,5 +16,7 @@ namespace WeatherService.API.Contracts
         public Task<Weather> AddWeatherAsync(Weather weather);
 
         public Task<Weather> UpdateWeatherAsync(Weather weather);
+
+        public Task DeleteWeatherAsync(Weather weather);
     }
 }

@@ -13,6 +13,8 @@ namespace WeatherService.API.Contracts
 
         public Task<WeatherResponseDto> AddWeatherAsync(Guid cityId, AddWeatherRequestDto request);
 
-        public Task<WeatherResponseDto> UpdateWeatherAsync(Guid id, UpdateWeatherRequestDto request);
+        public Task<WeatherResponseDto> UpdateWeatherAsync(WeatherResponseDto weatherDto, UpdateWeatherRequestDto request);
+
+        public Task DeleteWeatherAsync(WeatherResponseDto weatherDto);
     }
 }

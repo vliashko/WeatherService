@@ -44,7 +44,6 @@ namespace WeatherService.API.Repositories
                          .OrderBy(w => w.DateTime)
                          .Skip((pageNumber - 1) * pageSize)
                          .Take(pageSize)
-                         .AsNoTracking()
                          .ToListAsync()
                          .ConfigureAwait(false);
         }
@@ -72,6 +71,13 @@ namespace WeatherService.API.Repositories
             await _context.SaveChangesAsync();
 
             return result.Entity;
+        }
+
+        public async Task DeleteWeatherAsync(Weather weather)
+        {
+            _context.Weathers.Remove(weather);
+
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -46,5 +46,7 @@ namespace WeatherService.API.Dtos.Responses
         /// Cool
         /// </example>
         public string Summary { get; set; }
+
+        public Guid CityId { get; set; }
     }
 }

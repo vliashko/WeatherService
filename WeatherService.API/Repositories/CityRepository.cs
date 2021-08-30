@@ -24,7 +24,6 @@ namespace WeatherService.API.Repositories
                      .OrderBy(w => w.Name)
                      .Skip((pageNumber - 1) * pageSize)
                      .Take(pageSize)
-                     .AsNoTracking()
                      .ToListAsync()
                      .ConfigureAwait(false);
         }

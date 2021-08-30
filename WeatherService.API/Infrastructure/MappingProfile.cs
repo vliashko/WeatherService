@@ -9,9 +9,9 @@ namespace WeatherService.API.Infrastructure
     {
         public MappingProfile()
         {
-            CreateMap<Weather, WeatherResponseDto>();
+            CreateMap<Weather, WeatherResponseDto>().ReverseMap();
             CreateMap<AddWeatherRequestDto, Weather>();
-            CreateMap<UpdateWeatherRequestDto, Weather>();
+            CreateMap<UpdateWeatherRequestDto, Weather>().ReverseMap();
 
             CreateMap<City, CityResponseDto>();
         }

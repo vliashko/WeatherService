@@ -45,7 +45,7 @@ namespace WeatherService.API
             services.AddAutoMapper(typeof(MappingProfile));
 
             services.AddDbContext<RepositoryDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("sqlConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("sqlConnection")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

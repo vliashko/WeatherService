@@ -35,6 +35,13 @@ namespace WeatherService.API.Services
             return weatherDto;
         }
 
+        public async Task DeleteWeatherAsync(WeatherResponseDto weatherDto)
+        {
+            var weather = _mapper.Map<Weather>(weatherDto);
+
+            await _repository.DeleteWeatherAsync(weather);
+        }
+
         public async Task<WeatherResponseDto> GetWeatherByIdAsync(Guid id)
         {
             var weather = await _repository.GetWeatherByIdAsync(id).ConfigureAwait(false);
@@ -61,17 +68,17 @@ namespace WeatherService.API.Services
             return result;
         }
 
-        public async Task<WeatherResponseDto> UpdateWeatherAsync(Guid id, UpdateWeatherRequestDto request)
+        public async Task<WeatherResponseDto> UpdateWeatherAsync(WeatherResponseDto weatherDto, UpdateWeatherRequestDto request)
         {
-            var weather = _mapper.Map<Weather>(request);
+            var weather = _mapper.Map<Weather>(weatherDto);
 
-            weather.Id = id;
+            _mapper.Map(request, weather);
 
-            var result = await _repository.UpdateWeatherAsync(weather).ConfigureAwait(false);
+            weather.TemperatureF = 32 + (int)(weather.TemperatureC / 0.5556);
 
-            var weatherDto = _mapper.Map<WeatherResponseDto>(result);
+            await _repository.UpdateWeatherAsync(_mapper.Map<Weather>(weather)).ConfigureAwait(false);
 
-            return weatherDto;
+            return _mapper.Map<WeatherResponseDto>(weather);
         }
     }
 }

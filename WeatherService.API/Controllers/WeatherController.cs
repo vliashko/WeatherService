@@ -146,9 +146,36 @@ namespace WeatherService.API.Controllers
                 return NotFound(new BaseErrorResponse((int)HttpStatusCode.NotFound, "Weather by provided id not found."));
             }
 
-            var response = await _service.UpdateWeatherAsync(id, request).ConfigureAwait(false);
+            var response = await _service.UpdateWeatherAsync(weather, request).ConfigureAwait(false);
 
             return Ok(response);
+        }
+
+        /// <summary>
+        /// Delete weather by provided id
+        /// </summary>
+        /// <param name="correlationId">The value that is used to combine several requests into a common group</param>
+        /// <param name="id">Id for search</param>
+        /// <response code="204">Success. Weather was deleted successfully</response>
+        /// <response code="404">Not Found</response>
+        /// <response code="500">Internal Server Error</response>
+        [ProducesResponseType(typeof(WeatherResponseDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BaseErrorResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(BaseErrorResponse), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(BaseErrorResponse), StatusCodes.Status500InternalServerError)]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromHeader(Name = "x-correlation-id")] string correlationId, [FromRoute] Guid id)
+        {
+            var weather = await _service.GetWeatherByIdAsync(id).ConfigureAwait(false);
+
+            if (weather is null)
+            {
+                return NotFound(new BaseErrorResponse((int)HttpStatusCode.NotFound, "Weather by provided id not found."));
+            }
+
+            await _service.DeleteWeatherAsync(weather).ConfigureAwait(false);
+
+            return NoContent();
         }
     }
 }

@@ -1,5 +1,8 @@
 ﻿namespace WeatherService.API.Dtos.Responses
 {
+    /// <summary>
+    /// Base Error Response class for Exceptions
+    /// </summary>
     public class BaseErrorResponse
     {
         public BaseErrorResponse() { }

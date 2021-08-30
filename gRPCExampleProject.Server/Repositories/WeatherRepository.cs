@@ -9,21 +9,48 @@ namespace gRPCExampleProject.Server.Repositories
 {
     public class WeatherRepository : IWeatherRepository
     {
-        private readonly string[] states = new[]
+        private static readonly Random random = new();
+
+        private static readonly Array enumValues = Enum.GetValues(typeof(City));
+
+        private readonly static string[] states = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        public async Task<List<Weather>> GetWeathers()
+        private readonly IEnumerable<Weather> weathers = Enumerable.Range(1, 200).Select(i => new Weather()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new Weather
+            City = (City)enumValues.GetValue(random.Next(enumValues.Length)),
+            Date = DateTime.Now.AddDays(-i),
+            Summary = states[random.Next(states.Length)],
+            TemperatureC = random.Next(-20, 55)
+        });
+
+        public async Task<int> GetWeathersCount(City city, DateTime? date)
+        {
+            var result = weathers.Where(w => w.City == city);
+
+            if (date.HasValue)
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = states[rng.Next(states.Length)]
-            })
-            .ToList();
+                result = weathers.Where(w => w.Date == date.Value.Date);
+            }
+
+            return result.Count();
+        }
+
+        public async Task<List<Weather>> GetWeathers(City city, DateTime? date, int pageNumber, int pageSize)
+        {
+            var result = weathers.Where(w => w.City == city);
+
+            if (date.HasValue)
+            {
+                result = weathers.Where(w => w.Date == date.Value.Date);
+            }
+
+            return result.Skip((pageNumber - 1) * pageSize)
+                         .Take(pageSize)
+                         .OrderBy(w => w.Date)
+                         .ToList();
         }
     }
 }

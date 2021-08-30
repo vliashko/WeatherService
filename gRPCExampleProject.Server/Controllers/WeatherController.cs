@@ -1,8 +1,9 @@
 ﻿using gRPCExampleProject.Server.Contracts;
-using gRPCExampleProject.Server.Dtos;
+using gRPCExampleProject.Server.Dtos.Requests;
+using gRPCExampleProject.Server.Dtos.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace gRPCExampleProject.Server.Controllers
@@ -24,16 +25,24 @@ namespace gRPCExampleProject.Server.Controllers
         /// Get list of weather
         /// </summary>
         /// <param name="correlationId">The value that is used to combine several requests into a common group</param>
+        /// <param name="request">Model for search</param>
         /// <response code="200">Success. List of weather was received successfully</response>
+        /// <response code="400">Bad Request</response>
         /// <response code="500">Internal Server Error</response>
-        [ProducesResponseType(typeof(List<WeatherResponseDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BaseResponseModel<WeatherResponseDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BaseErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(BaseErrorResponse), StatusCodes.Status500InternalServerError)]
         [HttpGet]
-        public async Task<IActionResult> Get([FromHeader(Name = "x-correlation-id")] string correlationId)
+        public async Task<IActionResult> Get([FromHeader(Name = "x-correlation-id")] string correlationId, [FromQuery] WeatherRequestDto request)
         {
-            var weathers = await _service.GetWeathers().ConfigureAwait(false);
+            if (request is null)
+            {
+                return BadRequest(new BaseErrorResponse((int)HttpStatusCode.BadRequest, "WeatherRequestDto cannot be null."));
+            }
 
-            return Ok(weathers);
+            var response = await _service.GetWeathers(request).ConfigureAwait(false);
+
+            return Ok(response);
         }
     }
 }

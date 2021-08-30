@@ -15,13 +15,13 @@ namespace gRPCExampleProject.Server.Infrastructure
 
         public async Task InvokeAsync(HttpContext context)
         {
-            if (context.Request.Headers[Constants.CorrelationId].Count == 0)
+            if (context.Request.Headers[Constants.CORRELATION_ID].Count == 0)
             {
                 var correlationId = Guid.NewGuid().ToString();
-                context.Request.Headers[Constants.CorrelationId] = correlationId;
+                context.Request.Headers[Constants.CORRELATION_ID] = correlationId;
             }
 
-            context.Response.Headers[Constants.CorrelationId] = context.Request.Headers[Constants.CorrelationId];
+            context.Response.Headers[Constants.CORRELATION_ID] = context.Request.Headers[Constants.CORRELATION_ID];
 
             if (_next != null)
             {

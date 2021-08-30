@@ -1,11 +1,11 @@
-﻿using gRPCExampleProject.Server.Dtos;
-using System.Collections.Generic;
+﻿using gRPCExampleProject.Server.Dtos.Requests;
+using gRPCExampleProject.Server.Dtos.Responses;
 using System.Threading.Tasks;
 
 namespace gRPCExampleProject.Server.Contracts
 {
     public interface IWeatherService
     {
-        public Task<List<WeatherResponseDto>> GetWeathers();
+        public Task<BaseResponseModel<WeatherResponseDto>> GetWeathers(WeatherRequestDto request);
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Converters;
 
 namespace gRPCExampleProject.Server
 {
@@ -26,12 +27,15 @@ namespace gRPCExampleProject.Server
                     .AllowAnyMethod()
                     .AllowAnyHeader()));
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.Converters.Add(new StringEnumConverter()));
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "gRPCExampleProject.Server", Version = "v1" });
             });
+
+            services.AddSwaggerGenNewtonsoftSupport();
 
             services.RegisterRepositories();
 

@@ -1,4 +1,4 @@
-﻿namespace gRPCExampleProject.Server.Dtos
+﻿namespace gRPCExampleProject.Server.Dtos.Responses
 {
     public class BaseErrorResponse
     {

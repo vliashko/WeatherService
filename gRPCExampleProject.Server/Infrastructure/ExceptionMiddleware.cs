@@ -1,4 +1,4 @@
-﻿using gRPCExampleProject.Server.Dtos;
+﻿using gRPCExampleProject.Server.Dtos.Responses;
 using gRPCExampleProject.Server.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;

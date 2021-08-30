@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace gRPCExampleProject.Server.Dtos
+namespace gRPCExampleProject.Server.Dtos.Responses
 {
     /// <summary>
     /// Weather model to Response

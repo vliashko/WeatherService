@@ -4,6 +4,8 @@ namespace gRPCExampleProject.Server.Models
 {
     public class Weather
     {
+        public City City { get; set; }
+
         public DateTime Date { get; set; }
 
         public int TemperatureC { get; set; }

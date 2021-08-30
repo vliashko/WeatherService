@@ -18,6 +18,16 @@ namespace WeatherService.API.Services
             _mapper = mapper;
         }
 
+        public Task<WeatherResponseDto> AddWeatherAsync(AddWeatherRequestDto request)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<WeatherResponseDto> GetWeatherByIdAsync(System.Guid id)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public async Task<BaseResponseModel<WeatherResponseDto>> GetWeathersAsync(WeatherRequestDto request)
         {
             var weathers = await _repository.GetWeathersAsync(request.City, request.Date, request.PageNumber, request.PageSize).ConfigureAwait(false);
@@ -33,6 +43,11 @@ namespace WeatherService.API.Services
             };
 
             return result;
+        }
+
+        public Task<WeatherResponseDto> UpdateWeatherAsync(UpdateWeatherRequestDto request)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

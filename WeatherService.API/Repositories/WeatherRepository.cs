@@ -52,5 +52,20 @@ namespace WeatherService.API.Repositories
                          .OrderBy(w => w.Date)
                          .ToList();
         }
+
+        public Task<Weather> GetWeatherByIdAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Weather> AddWeather(Weather weather)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Weather> UpdateWeather(Weather weather)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

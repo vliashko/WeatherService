@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WeatherService.API.Server.Dtos.Responses
+namespace WeatherService.API.Dtos.Responses
 {
     public class PaginationResponseModel
     {

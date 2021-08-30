@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace WeatherService.API.Server
+namespace WeatherService.API
 {
     public class Program
     {

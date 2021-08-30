@@ -1,4 +1,4 @@
-﻿namespace WeatherService.API.Server.Infrastructure
+﻿namespace WeatherService.API.Infrastructure
 {
     // TODO: Move it to appsettings.json
     public class Constants

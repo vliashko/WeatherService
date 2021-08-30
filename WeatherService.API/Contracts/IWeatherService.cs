@@ -1,8 +1,8 @@
-﻿using WeatherService.API.Server.Dtos.Requests;
-using WeatherService.API.Server.Dtos.Responses;
+﻿using WeatherService.API.Dtos.Requests;
+using WeatherService.API.Dtos.Responses;
 using System.Threading.Tasks;
 
-namespace WeatherService.API.Server.Contracts
+namespace WeatherService.API.Contracts
 {
     public interface IWeatherService
     {

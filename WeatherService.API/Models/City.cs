@@ -1,4 +1,4 @@
-﻿namespace WeatherService.API.Server.Models
+﻿namespace WeatherService.API.Models
 {
     public enum City
     {

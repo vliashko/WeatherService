@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using WeatherService.API.Server.Contracts;
-using WeatherService.API.Server.Dtos.Requests;
-using WeatherService.API.Server.Dtos.Responses;
+using WeatherService.API.Contracts;
+using WeatherService.API.Dtos.Requests;
+using WeatherService.API.Dtos.Responses;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace WeatherService.API.Server.Services
+namespace WeatherService.API.Services
 {
     public class WeatherService : IWeatherService
     {

@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace WeatherService.API.Server.Infrastructure
+namespace WeatherService.API.Infrastructure
 {
     public class CorrelationMiddleware
     {

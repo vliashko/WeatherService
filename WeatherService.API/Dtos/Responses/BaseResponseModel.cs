@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WeatherService.API.Server.Dtos.Responses
+namespace WeatherService.API.Dtos.Responses
 {
     public class BaseResponseModel<T>
     {

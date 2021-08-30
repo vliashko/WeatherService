@@ -1,8 +1,8 @@
-﻿using WeatherService.API.Server.Infrastructure;
+﻿using WeatherService.API.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using System;
 
-namespace WeatherService.API.Server.Extensions
+namespace WeatherService.API.Extensions
 {
     public static class ExceptionExtensions
     {

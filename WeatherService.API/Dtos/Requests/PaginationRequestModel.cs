@@ -1,6 +1,6 @@
-﻿using WeatherService.API.Server.Infrastructure;
+﻿using WeatherService.API.Infrastructure;
 
-namespace WeatherService.API.Server.Dtos.Requests
+namespace WeatherService.API.Dtos.Requests
 {
     public abstract class PaginationRequestModel
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace WeatherService.API.Server.Infrastructure
+namespace WeatherService.API.Infrastructure
 {
     public class NotDefaultDateTimeAttribute : ValidationAttribute
     {

@@ -1,7 +1,7 @@
-﻿using WeatherService.API.Server.Infrastructure;
+﻿using WeatherService.API.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 
-namespace WeatherService.API.Server.Extensions
+namespace WeatherService.API.Extensions
 {
     public static class CorrelationExtensions
     {

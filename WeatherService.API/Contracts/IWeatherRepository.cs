@@ -1,9 +1,9 @@
-﻿using WeatherService.API.Server.Models;
+﻿using WeatherService.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace WeatherService.API.Server.Contracts
+namespace WeatherService.API.Contracts
 {
     public interface IWeatherRepository
     {

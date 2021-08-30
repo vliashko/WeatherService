@@ -1,12 +1,12 @@
-﻿using WeatherService.API.Server.Contracts;
-using WeatherService.API.Server.Dtos.Requests;
-using WeatherService.API.Server.Dtos.Responses;
+﻿using WeatherService.API.Contracts;
+using WeatherService.API.Dtos.Requests;
+using WeatherService.API.Dtos.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace WeatherService.API.Server.Controllers
+namespace WeatherService.API.Controllers
 {
     [ApiController]
     [Route("api/v1/weathers")]

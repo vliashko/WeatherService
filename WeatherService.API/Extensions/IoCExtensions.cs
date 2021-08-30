@@ -1,9 +1,9 @@
-﻿using WeatherService.API.Server.Contracts;
-using WeatherService.API.Server.Repositories;
-using WeatherService.API.Server.Services;
+﻿using WeatherService.API.Contracts;
+using WeatherService.API.Repositories;
+using WeatherService.API.Services;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace WeatherService.API.Server.Extensions
+namespace WeatherService.API.Extensions
 {
     public static class IoCExtensions
     {

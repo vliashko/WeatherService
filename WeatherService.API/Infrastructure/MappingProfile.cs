@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using WeatherService.API.Server.Dtos.Responses;
-using WeatherService.API.Server.Models;
+using WeatherService.API.Dtos.Responses;
+using WeatherService.API.Models;
 
-namespace WeatherService.API.Server.Infrastructure
+namespace WeatherService.API.Infrastructure
 {
     public class MappingProfile : Profile
     {

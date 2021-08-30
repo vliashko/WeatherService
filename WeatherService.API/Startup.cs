@@ -1,5 +1,5 @@
-using WeatherService.API.Server.Extensions;
-using WeatherService.API.Server.Infrastructure;
+using WeatherService.API.Extensions;
+using WeatherService.API.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
 
-namespace WeatherService.API.Server
+namespace WeatherService.API
 {
     public class Startup
     {
@@ -32,7 +32,7 @@ namespace WeatherService.API.Server
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WeatherService.API.Server", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WeatherService.API", Version = "v1" });
             });
 
             services.AddSwaggerGenNewtonsoftSupport();
@@ -58,7 +58,7 @@ namespace WeatherService.API.Server
             }
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WeatherService.API.Server v1"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WeatherService.API v1"));
 
             app.UseRouting();
 

@@ -1,5 +1,5 @@
-﻿using WeatherService.API.Server.Dtos.Responses;
-using WeatherService.API.Server.Extensions;
+﻿using WeatherService.API.Dtos.Responses;
+using WeatherService.API.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace WeatherService.API.Server.Infrastructure
+namespace WeatherService.API.Infrastructure
 {
     public class ExceptionMiddleware
     {

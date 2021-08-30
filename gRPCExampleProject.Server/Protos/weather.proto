@@ -1,8 +1,0 @@
-﻿option csharp_namespace = "gRPCExampleProject.Server"
-
-package weathers;
-
-service WeatherService {
-	rpc GetWeathers () returns (List<WeatherResponseDto>)
-	rpc GetWeathersStream () returns (stream List<WeatherResponseDto>)
-}

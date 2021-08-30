@@ -18,13 +18,13 @@ namespace gRPCExampleProject.Server.Services
             _mapper = mapper;
         }
 
-        public async Task<BaseResponseModel<WeatherResponseDto>> GetWeathers(WeatherRequestDto request)
+        public async Task<BaseResponseModel<WeatherResponseDto>> GetWeathersAsync(WeatherRequestDto request)
         {
-            var weathers = await _repository.GetWeathers(request.City, request.Date, request.PageNumber, request.PageSize).ConfigureAwait(false);
+            var weathers = await _repository.GetWeathersAsync(request.City, request.Date, request.PageNumber, request.PageSize).ConfigureAwait(false);
 
             var dtoWeathers = _mapper.Map<List<WeatherResponseDto>>(weathers);
 
-            var count = await _repository.GetWeathersCount(request.City, request.Date);
+            var count = await _repository.GetWeathersCountAsync(request.City, request.Date);
 
             var result = new BaseResponseModel<WeatherResponseDto>()
             {

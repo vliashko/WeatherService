@@ -7,8 +7,8 @@ namespace gRPCExampleProject.Server.Contracts
 {
     public interface IWeatherRepository
     {
-        public Task<int> GetWeathersCount(City city, DateTime? date);
+        public Task<int> GetWeathersCountAsync(City city, DateTime? date);
 
-        public Task<List<Weather>> GetWeathers(City city, DateTime? date, int pageNumber, int pageSize);
+        public Task<List<Weather>> GetWeathersAsync(City city, DateTime? date, int pageNumber, int pageSize);
     }
 }

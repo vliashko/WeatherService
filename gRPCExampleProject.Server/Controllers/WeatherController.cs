@@ -40,7 +40,7 @@ namespace gRPCExampleProject.Server.Controllers
                 return BadRequest(new BaseErrorResponse((int)HttpStatusCode.BadRequest, "WeatherRequestDto cannot be null."));
             }
 
-            var response = await _service.GetWeathers(request).ConfigureAwait(false);
+            var response = await _service.GetWeathersAsync(request).ConfigureAwait(false);
 
             return Ok(response);
         }

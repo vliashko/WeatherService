@@ -26,7 +26,7 @@ namespace gRPCExampleProject.Server.Repositories
             TemperatureC = random.Next(-20, 55)
         });
 
-        public async Task<int> GetWeathersCount(City city, DateTime? date)
+        public async Task<int> GetWeathersCountAsync(City city, DateTime? date)
         {
             var result = weathers.Where(w => w.City == city);
 
@@ -38,7 +38,7 @@ namespace gRPCExampleProject.Server.Repositories
             return result.Count();
         }
 
-        public async Task<List<Weather>> GetWeathers(City city, DateTime? date, int pageNumber, int pageSize)
+        public async Task<List<Weather>> GetWeathersAsync(City city, DateTime? date, int pageNumber, int pageSize)
         {
             var result = weathers.Where(w => w.City == city);
 

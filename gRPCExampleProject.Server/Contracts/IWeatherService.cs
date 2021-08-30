@@ -6,6 +6,6 @@ namespace gRPCExampleProject.Server.Contracts
 {
     public interface IWeatherService
     {
-        public Task<BaseResponseModel<WeatherResponseDto>> GetWeathers(WeatherRequestDto request);
+        public Task<BaseResponseModel<WeatherResponseDto>> GetWeathersAsync(WeatherRequestDto request);
     }
 }
